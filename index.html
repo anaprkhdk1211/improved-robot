@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gapped Text Exercise</title>
+    <style>
+        .gap {
+            padding: 5px;
+            background-color: #f0f0f0;
+            border-radius: 3px;
+        }
+        .correct {
+            background-color: lightgreen;
+        }
+        .incorrect {
+            background-color: lightcoral;
+        }
+        .indicator {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            margin-left: 5px;
+            background-color: grey;
+        }
+    </style>
+    <script>
+        const correctAnswers = [
+            'conflict', 'troops', 'invades', 'breaks out', 'defeated', 
+            'negotiating', 'track down', 'join forces', 'violations', 
+            'tension', 'are surrounded', 'seize control'
+        ];
+        const attemptCounts = Array(correctAnswers.length).fill(0);
+
+        function checkAnswer(selectElement, index) {
+            const userAnswer = selectElement.value;
+            attemptCounts[index]++;
+
+            const indicator = document.getElementById(`indicator-${index}`);
+            if (userAnswer === correctAnswers[index]) {
+                selectElement.className = 'gap correct';
+                if (attemptCounts[index] === 1) {
+                    indicator.style.backgroundColor = 'green';
+                } else if (attemptCounts[index] === 2) {
+                    indicator.style.background = 'linear-gradient(to bottom, green 50%, red 50%)';
+                }
+            } else {
+                selectElement.className = 'gap incorrect';
+                if (attemptCounts[index] >= 2) {
+                    indicator.style.backgroundColor = 'red';
+                    selectElement.value = correctAnswers[index]; // Show correct answer after 2 incorrect attempts
+                }
+            }
+            updateScore();
+        }
+
+        function updateScore() {
+            const totalGaps = correctAnswers.length;
+            let correctCount = 0;
+
+            document.querySelectorAll('select').forEach((selectElement, index) => {
+                if (selectElement.value === correctAnswers[index]) {
+                    correctCount++;
+                }
+            });
+
+            const percentage = Math.round((correctCount / totalGaps) * 100);
+            document.getElementById('result').innerText = `Score: ${correctCount} / ${totalGaps} (${percentage}%)`;
+        }
+    </script>
+</head>
+<body>
+    <h1>Film of the Week: Blood Diamond (2006)</h1>
+    <p>
+        Sierra Leone 1999, a country ravaged by the 
+        <select class="gap" onchange="checkAnswer(this, 0)">
+            <option value="">Choose...</option>
+            <option value="coup">coup</option>
+            <option value="conflict">conflict</option>
+        </select>
+        <span id="indicator-0" class="indicator"></span>
+        between government 
+        <select class="gap" onchange="checkAnswer(this, 1)">
+            <option value="">Choose...</option>
+            <option value="casualties">casualties</option>
+            <option value="troops">troops</option>
+        </select>
+        <span id="indicator-1" class="indicator"></span>
+        and rebel forces. In the opening scene, the Revolutionary United Front (RUF) 
+        <select class="gap" onchange="checkAnswer(this, 2)">
+            <option value="">Choose...</option>
+            <option value="invades">invades</option>
+            <option value="defends">defends</option>
+        </select>
+        <span id="indicator-2" class="indicator"></span>
+        a small village, capturing a fisherman called Solomon Vandy, and forcing his son Dia to become a child soldier. Solomon is forced to dig for diamonds, the rebels’ main source of funding. He finds a large pink diamond, and manages to hide it, but the rebel officer in charge, Captain Poison, sees him do so. However, fighting suddenly
+        <select class="gap" onchange="checkAnswer(this, 3)">
+            <option value="">Choose...</option>
+            <option value="breaks down">breaks down</option>
+            <option value="breaks out">breaks out</option>
+        </select>
+        <span id="indicator-3" class="indicator"></span>
+        between the army and the rebels resulting in the latter being
+        <select class="gap" onchange="checkAnswer(this, 4)">
+            <option value="">Choose...</option>
+            <option value="defeated">defeated</option>
+            <option value="withdrawn">withdrawn</option>
+        </select>
+        <span id="indicator-4" class="indicator"></span>
+        . Both Solomon and Captain Poison are imprisoned, and with them is Danny Archer, an ex-mercenary turned diamond smuggler. He overhears Captain Poison yelling at Solomon about the diamond and sees an opportunity. After
+        <select class="gap" onchange="checkAnswer(this, 5)">
+            <option value="">Choose...</option>
+            <option value="negotiating">negotiating</option>
+            <option value="establishing">establishing</option>
+        </select>
+        <span id="indicator-5" class="indicator"></span>
+        Solomon's release, Archer agrees to help him
+        <select class="gap" onchange="checkAnswer(this, 6)">
+            <option value="">Choose...</option>
+            <option value="gain">gain</option>
+            <option value="track down">track down</option>
+        </select>
+        <span id="indicator-6" class="indicator"></span>
+        his family in exchange for the diamond.
+    </p>
+    <p>
+        The two men
+        <select class="gap" onchange="checkAnswer(this, 7)">
+            <option value="">Choose...</option>
+            <option value="suffer sanctions">suffer sanctions</option>
+            <option value="join forces">join forces</option>
+        </select>
+        <span id="indicator-7" class="indicator"></span>
+        with an American journalist called Maddy Bowen, who wants to help Solomon. On discovering Archer’s true motives, however, she refuses to continue unless he agrees to help her expose the atrocities and human rights
+        <select class="gap" onchange="checkAnswer(this, 8)">
+            <option value="">Choose...</option>
+            <option value="violations">violations</option>
+            <option value="negotiations">negotiations</option>
+        </select>
+        <span id="indicator-8" class="indicator"></span>
+        surrounding the blood diamond trade in Sierra Leone. Archer agrees, and they use the press convoy to travel across the country. Maddy leaves the country, and the men finally succeed in finding the mining camp, where they find not only Solomon’s son, but also Captain Poison. The
+        <select class="gap" onchange="checkAnswer(this, 9)">
+            <option value="">Choose...</option>
+            <option value="resolution">resolution</option>
+            <option value="tension">tension</option>
+        </select>
+        <span id="indicator-9" class="indicator"></span>
+        rises as Dia refuses to acknowledge his father, and Archer and Solomon
+        <select class="gap" onchange="checkAnswer(this, 10)">
+            <option value="">Choose...</option>
+            <option value="gain ground">gain ground</option>
+            <option value="are surrounded">are surrounded</option>
+        </select>
+        <span id="indicator-10" class="indicator"></span>
+        by Captain Poison and his men, but an air strike by South African mercenaries enables Solomon to kill Poison. Their troubles aren’t over, however, as the leader of the South African mercenaries now wants the diamond for himself. Archer manages to
+        <select class="gap" onchange="checkAnswer(this, 11)">
+            <option value="">Choose...</option>
+            <option value="achieve a resolution">achieve a resolution</option>
+            <option value="seize control">seize control</option>
+        </select>
+        <span id="indicator-11" class="indicator"></span>
+        by killing him and his men, but gets badly injured. Realising he is dying, he gives the diamond to Solomon and tells him to take his son and go. He delays the soldiers chasing them to give Solomon and Dia time to escape. His final act before he dies is to phone Maddy to ask her to help Solomon and his family get to safety.
+    </p>
+    <h3 id="result">Score: 0 / 12 (0%)</h3>
+</body>
+</html>
